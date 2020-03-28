@@ -1,0 +1,456 @@
+# LANGUAGE (ja) translation for WP_NearbyFacilities.
+# Copyright (C) 2020 WP_NearbyFacilities contributors.
+# This file is distributed under the same license as the WordPress package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-02-27 17:11-0600\n"
+"PO-Revision-Date: 2020-03-28 22:05+0900\n"
+"Last-Translator: Hikaru Shizuki shizuki17xx@gmail.com\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: \n"
+"Language: ja\n"
+"X-Generator: Poedit 2.3\n"
+
+#: class-nearbyfacilities.php:93
+msgid "Restaurant"
+msgstr "レストラン"
+
+#: class-nearbyfacilities.php:94
+msgid "Accounting"
+msgstr "会計事務所"
+
+#: class-nearbyfacilities.php:95
+msgid "Airport"
+msgstr "空港"
+
+#: class-nearbyfacilities.php:96
+msgid "Amusement park"
+msgstr "遊園地"
+
+#: class-nearbyfacilities.php:97
+msgid "Aquarium"
+msgstr "水族館"
+
+#: class-nearbyfacilities.php:98
+msgid "Art gallery"
+msgstr "美術館"
+
+#: class-nearbyfacilities.php:99
+msgid "ATM"
+msgstr "ATM"
+
+#: class-nearbyfacilities.php:100
+msgid "Bakery"
+msgstr "パン屋"
+
+#: class-nearbyfacilities.php:101
+msgid "Bank"
+msgstr "銀行"
+
+#: class-nearbyfacilities.php:102
+msgid "Bar"
+msgstr "バー"
+
+#: class-nearbyfacilities.php:103
+msgid "Beauty salon"
+msgstr "美容院"
+
+#: class-nearbyfacilities.php:104
+msgid "Bicycle store"
+msgstr "自転車屋"
+
+#: class-nearbyfacilities.php:105
+msgid "Book store"
+msgstr "書店"
+
+#: class-nearbyfacilities.php:106
+msgid "Bowling alley"
+msgstr "ボーリング場"
+
+#: class-nearbyfacilities.php:107
+msgid "Bus station"
+msgstr "バス停"
+
+#: class-nearbyfacilities.php:108
+msgid "Cafe"
+msgstr "カフェ"
+
+#: class-nearbyfacilities.php:109
+msgid "Campground"
+msgstr "キャンプ場"
+
+#: class-nearbyfacilities.php:110
+msgid "Car dealer"
+msgstr "カーディーラー"
+
+#: class-nearbyfacilities.php:111
+msgid "Car rental"
+msgstr "レンタカー屋"
+
+#: class-nearbyfacilities.php:112
+msgid "Car repair"
+msgstr "自動車修理, 板金屋"
+
+#: class-nearbyfacilities.php:113
+msgid "Car wash"
+msgstr "洗車場"
+
+#: class-nearbyfacilities.php:114
+msgid "Casino"
+msgstr "カジノ"
+
+#: class-nearbyfacilities.php:115
+msgid "Cemetery"
+msgstr "墓地"
+
+#: class-nearbyfacilities.php:116
+msgid "Church"
+msgstr "教会"
+
+#: class-nearbyfacilities.php:117
+msgid "City hall"
+msgstr "市役所"
+
+#: class-nearbyfacilities.php:118
+msgid "Clothing store"
+msgstr "洋服店"
+
+#: class-nearbyfacilities.php:119
+msgid "Convenience store"
+msgstr "コンビニ"
+
+#: class-nearbyfacilities.php:120
+msgid "Courthouse"
+msgstr "裁判所"
+
+#: class-nearbyfacilities.php:121
+msgid "Dentist"
+msgstr "歯科"
+
+#: class-nearbyfacilities.php:122
+msgid "Department store"
+msgstr "デパート"
+
+#: class-nearbyfacilities.php:123
+msgid "Doctor"
+msgstr "医者"
+
+#: class-nearbyfacilities.php:124
+msgid "Electrician"
+msgstr "電気事業者"
+
+#: class-nearbyfacilities.php:125
+msgid "Electronics store"
+msgstr "電器屋"
+
+#: class-nearbyfacilities.php:126
+msgid "Embassy"
+msgstr "大使館"
+
+#: class-nearbyfacilities.php:127
+msgid "Finance"
+msgstr "財務機関"
+
+#: class-nearbyfacilities.php:128
+msgid "Fire station"
+msgstr "消防署"
+
+#: class-nearbyfacilities.php:129
+msgid "Florist"
+msgstr "花屋"
+
+#: class-nearbyfacilities.php:130
+msgid "Food"
+msgstr "飲食店"
+
+#: class-nearbyfacilities.php:131
+msgid "Funeral home"
+msgstr "斎場"
+
+#: class-nearbyfacilities.php:132
+msgid "Furniture store"
+msgstr "家具屋"
+
+#: class-nearbyfacilities.php:133
+msgid "Gas station"
+msgstr "ガソリンスタンド"
+
+#: class-nearbyfacilities.php:134
+msgid "General contractor"
+msgstr "ゼネコン"
+
+#: class-nearbyfacilities.php:135
+msgid "Grocery or supermarket"
+msgstr "日用品店, スーパーマーケット"
+
+#: class-nearbyfacilities.php:136
+msgid "Gym"
+msgstr "スポーツジム"
+
+#: class-nearbyfacilities.php:137
+msgid "Hair care"
+msgstr "床屋"
+
+#: class-nearbyfacilities.php:138
+msgid "Hardware store"
+msgstr "工具店, ホームセンター"
+
+#: class-nearbyfacilities.php:139
+msgid "Health"
+msgstr "主に医療機関"
+
+#: class-nearbyfacilities.php:140
+msgid "Hindu temple"
+msgstr "ヒンドゥー寺院"
+
+#: class-nearbyfacilities.php:141
+msgid "Home goods store"
+msgstr "ホームセンター"
+
+#: class-nearbyfacilities.php:142
+msgid "Hospital"
+msgstr "医療機関"
+
+#: class-nearbyfacilities.php:143
+msgid "Insurance agency"
+msgstr "保険代理店"
+
+#: class-nearbyfacilities.php:144
+msgid "Jewelry store"
+msgstr "宝石店"
+
+#: class-nearbyfacilities.php:145
+msgid "Laundry"
+msgstr "クリーニング店, コインランドリー"
+
+#: class-nearbyfacilities.php:146
+msgid "Lawyer"
+msgstr "法律事務所"
+
+#: class-nearbyfacilities.php:147
+msgid "Library"
+msgstr "図書館"
+
+#: class-nearbyfacilities.php:148
+msgid "Liquor store"
+msgstr "酒店"
+
+#: class-nearbyfacilities.php:149
+msgid "Local government office"
+msgstr "地方公共団体"
+
+#: class-nearbyfacilities.php:150
+msgid "Locksmith"
+msgstr "鍵屋"
+
+#: class-nearbyfacilities.php:151
+msgid "Lodging"
+msgstr "宿泊施設"
+
+#: class-nearbyfacilities.php:152
+msgid "Meal delivery"
+msgstr "飲食店（出前形式）"
+
+#: class-nearbyfacilities.php:153
+msgid "Meal takeaway"
+msgstr "飲食店（テイクアウト形式）"
+
+#: class-nearbyfacilities.php:154
+msgid "Mosque"
+msgstr "モスク"
+
+#: class-nearbyfacilities.php:155 class-nearbyfacilities.php:156
+msgid "Movie theater"
+msgstr "映画館"
+
+#: class-nearbyfacilities.php:157
+msgid "Moving company"
+msgstr "運送屋, 引越し屋"
+
+#: class-nearbyfacilities.php:158
+msgid "Museum"
+msgstr "博物館, ミュージアム"
+
+#: class-nearbyfacilities.php:159
+msgid "Night club"
+msgstr "ナイトクラブ"
+
+#: class-nearbyfacilities.php:160
+msgid "Painter"
+msgstr "塗装屋"
+
+#: class-nearbyfacilities.php:161
+msgid "Park"
+msgstr "公園"
+
+#: class-nearbyfacilities.php:162
+msgid "Parking"
+msgstr "駐車場"
+
+#: class-nearbyfacilities.php:163
+msgid "Pet store"
+msgstr "ペット屋"
+
+#: class-nearbyfacilities.php:164
+msgid "Pharmacy"
+msgstr "薬局"
+
+#: class-nearbyfacilities.php:165
+msgid "Physiotherapist"
+msgstr "理学療法士"
+
+#: class-nearbyfacilities.php:166
+msgid "Place of worship"
+msgstr "神社、寺"
+
+#: class-nearbyfacilities.php:167
+msgid "Plumber"
+msgstr "配管工, 水道業者"
+
+#: class-nearbyfacilities.php:168
+msgid "Police"
+msgstr "警察署, 交番"
+
+#: class-nearbyfacilities.php:169
+msgid "Post office"
+msgstr "郵便局"
+
+#: class-nearbyfacilities.php:170
+msgid "Real estate agency"
+msgstr "不動産業者"
+
+#: class-nearbyfacilities.php:171
+msgid "Roofing contractor"
+msgstr "屋根屋"
+
+#: class-nearbyfacilities.php:172
+msgid "Rv park"
+msgstr "RVパーク"
+
+#: class-nearbyfacilities.php:173
+msgid "School"
+msgstr "学校 (塾, 習い事系含)"
+
+#: class-nearbyfacilities.php:174
+msgid "Shoe store"
+msgstr "靴屋"
+
+#: class-nearbyfacilities.php:175
+msgid "Shopping mall"
+msgstr "ショッピングモール, 複合商業施設"
+
+#: class-nearbyfacilities.php:176
+msgid "Spa"
+msgstr "温泉, 銭湯"
+
+#: class-nearbyfacilities.php:177
+msgid "Stadium"
+msgstr "スタジアム"
+
+#: class-nearbyfacilities.php:178
+msgid "Storage"
+msgstr "倉庫"
+
+#: class-nearbyfacilities.php:179
+msgid "Subway station"
+msgstr "地下鉄駅"
+
+#: class-nearbyfacilities.php:180
+msgid "Synagogue"
+msgstr "ユダヤ教の会堂"
+
+#: class-nearbyfacilities.php:181
+msgid "Taxi stand"
+msgstr "タクシー乗り場"
+
+#: class-nearbyfacilities.php:182
+msgid "Train station"
+msgstr "鉄道駅"
+
+#: class-nearbyfacilities.php:183
+msgid "Travel agency"
+msgstr "旅行代理店"
+
+#: class-nearbyfacilities.php:184
+msgid "University"
+msgstr "大学"
+
+#: class-nearbyfacilities.php:185
+msgid "Veterinary care"
+msgstr "動物病院"
+
+#: class-nearbyfacilities.php:186
+msgid "Zoo"
+msgstr "動物園"
+
+#: class-nearbyfacilities.php:265
+msgid ""
+"Something went wrong while retrieving your map, please ensure you have "
+"entered the short code correctly."
+msgstr ""
+"地図の取得中に問題が発生しました。ショートコードを正しく入力したことを確認"
+"してください。"
+
+#: class-nearbyfacilities.php:268
+msgid "Unable to contact Google API service."
+msgstr "Google APIサービスに接続できませんでした。"
+
+#: html/about.phtml:2
+msgid "Display markers at facilities near the specified point in googlemaps."
+msgstr "Google マップ内の指定したポイント付近の施設にマーカーを表示します。"
+
+#: html/about.phtml:86 html/nearbyfacilitiesmap.phtml:22
+msgid "Zero results."
+msgstr "結果はゼロでした。"
+
+#: html/about.phtml:87 html/nearbyfacilitiesmap.phtml:23
+msgid "Server connection failed."
+msgstr "サーバー接続に失敗しました。"
+
+#: html/about.phtml:88 html/nearbyfacilitiesmap.phtml:24
+msgid "Your request was invalid."
+msgstr "リクエストは無効でした。"
+
+#: html/about.phtml:89 html/nearbyfacilitiesmap.phtml:25
+msgid "The usage limit for the request has been exceeded."
+msgstr "リクエストの使用制限を超えました。"
+
+#: html/about.phtml:90 html/nearbyfacilitiesmap.phtml:26
+msgid "The service could not be used."
+msgstr "サービスを使用できませんでした。"
+
+#: html/about.phtml:91 html/nearbyfacilitiesmap.phtml:27
+msgid "An unknown error has occurred."
+msgstr "不明なエラーが発生しました。"
+
+#: html/about.phtml:3
+msgid "Address or landmark"
+msgstr "住所またはランドマーク"
+
+#: html/about.phtml:5
+msgid "Facility type"
+msgstr "施設の種類"
+
+#: html/about.phtml:9
+msgid "Search keyword"
+msgstr "検索キーワード"
+
+#: html/about.phtml:11
+msgid "Search radius"
+msgstr "検索半径"
+
+#: html/about.phtml:20
+msgid "Zoom level"
+msgstr "ズームレベル"
+
+#: html/about.phtml:20
+msgid "The short code is displayed.<br>Click to copy to clipboard."
+msgstr ""
+"ショートコードが表示されます。<br>クリックするとクリップボードにコピーされ"
+"ます。"

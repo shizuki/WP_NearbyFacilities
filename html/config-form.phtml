@@ -1,0 +1,12 @@
+<div class="wrap">
+    <h1>Configring for Nearby Facilities.</h1>
+    <h3><?php _e( 'Register your Google API key in Wordpress.' ) ?></h3>
+    <form action="" method='post' id="my-submenu-form">
+        <?php wp_nonce_field(self::CREDENTIAL_ACTION, self::CREDENTIAL_NAME) ?>
+        <p>
+            <label for="api_key">Google Places API Key : </label>
+            <input type="password" name="api_key" value="<?php echo $api_key; ?>"/>
+        </p>
+        <p><input type='submit' value='Save' class='button button-primary button-large'></p>
+    </form>
+  </div>

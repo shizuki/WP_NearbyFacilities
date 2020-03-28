@@ -1,0 +1,35 @@
+<div class="nearby_facilities_map-container">
+    <div id="<?php echo esc_attr($map_id); ?>" class="nearby_facilities_map-container-inner" style="width:<?php echo esc_attr($atts['width']) ?>; height:<?php echo esc_attr($atts['height']) ?>;"></div>
+</div>
+<script src="<?php echo plugin_dir_url(__FILE__) ?>../js/getshortcodeclass.js"></script>
+<script type="text/javascript">
+    const container_id = '<?php echo $map_id; ?>';
+    const shortcodeLat = Number('<?php echo $coordinates['lat']; ?>');
+    const shortcodeLng = Number('<?php echo $coordinates['lng']; ?>');
+    const keywordInput = '<?php echo $atts['keyword']; ?>';
+    const typeInput = '<?php echo $atts['type']; ?>';
+    const radiusInput = <?php echo $atts['radius']; ?>;
+    const zoomInput = <?php echo $atts['zoom']; ?>;
+    const defLang = '<?php echo substr(get_user_locale(), 0, 2) ?>';
+    let placesList;
+    let map;
+    const marker = [];
+    const infoWindow = [];
+    const obj = document.getElementById("radiusInput");
+    const searchErrors = {
+        "zero_results": "<?php _e('Zero results.', 'NearbyFacilities') ?>",
+        "error": "<?php _e('Server connection failed.', 'NearbyFacilities') ?>",
+        "invalid_request": "<?php _e('Your request was invalid.', 'NearbyFacilities') ?>",
+        "over_query_limit": "<?php _e('The usage limit for the request has been exceeded.', 'NearbyFacilities') ?>",
+        "request_denied": "<?php _e('The service could not be used.', 'NearbyFacilities') ?>",
+        "unknown_error": "<?php _e('An unknown error has occurred.', 'NearbyFacilities') ?>"
+    }
+    const mapField = document.getElementById("<?php echo $map_id; ?>");
+
+    function initMap() {
+        const mapi = new getShortCode();
+        const mapID = '<?php echo $map_id; ?>';
+        mapi.startNearbySearch(null);
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $api_key ?>&libraries=places&callback=initMap" async defer></script>
