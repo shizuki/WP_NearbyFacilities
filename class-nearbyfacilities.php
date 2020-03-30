@@ -207,7 +207,7 @@ class NearbyFacilities {
 	 */
 	public static function nearbymap_shortcode( array $atts ) {
 		global $post_type;
-		if ( strpos( $_SERVER['REQUEST_URI'], 'action=edit' ) || strpos( $_SERVER['REQUEST_URI'], 'rest_route=' ) ) {
+		if ( strpos( $_SERVER['REQUEST_URI'], 'action=edit' ) || strpos( $_SERVER['REQUEST_URI'], 'rest_route=') || strpos( $_SERVER['REQUEST_URI'], 'wp-json' ) ) {
 			return;
 		}
 		$default = array(
