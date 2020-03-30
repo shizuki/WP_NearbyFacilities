@@ -206,6 +206,10 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public static function nearbymap_shortcode( array $atts ) {
+		global $post_type;
+		if ( strpos( $_SERVER['REQUEST_URI'], 'action=edit' ) || strpos( $_SERVER['REQUEST_URI'], 'rest_route=' ) ) {
+			return;
+		}
 		$default = array(
 			'address'  => false,
 			'width'    => '100%',
