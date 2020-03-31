@@ -1,5 +1,4 @@
-class getShortCode
-{
+class getShortCode {
 
     constructor() {
         // this.Map = null
@@ -43,6 +42,7 @@ class getShortCode
 
     startNearbySearch(latLng) {
         if (!latLng) {
+            console.log(`${Number(shortcodeLat)}, ${Number(shortcodeLng)}`)
             latLng = new google.maps.LatLng(Number(shortcodeLat), Number(shortcodeLng))
         }
         map = new google.maps.Map(mapField, {
@@ -124,8 +124,8 @@ class getShortCode
         })
         const hasImages = Array.isArray(options.photos) && options.photos.length > 0
         const noImage = `            <div class="swiper-slide" style="background-image: url(http://placehold.jp/262x104.png?text=No%20Image);"></div>\n`
-            // <img src="http://placehold.jp/262x104.png?text=No%20Image">
-            // </div>\n`
+        // <img src="http://placehold.jp/262x104.png?text=No%20Image">
+        // </div>\n`
         const contentTop = `<div class="facilitiesinfo">
     <div class="facilityName">
         <div>${options.name}</div>
@@ -136,8 +136,8 @@ class getShortCode
         if (hasImages) {
             contentImages = options.photos.map(value => {
                 return `            <div class="swiper-slide" style="background-image: url(${value.getUrl()});"></div>`
-            //     <img src="${value.getUrl()}">
-            // </div>`
+                //     <img src="${value.getUrl()}">
+                // </div>`
             }).join('\n')// + noImage
         } else {
             contentImages = noImage
@@ -176,17 +176,17 @@ class getShortCode
             setTimeout(this.switchBounceMotion, 2500, cnt)
         })
         google.maps.event.addListener(infoWindow[cnt], "domready", () => {
-            // var swiper = new Swiper('.horizonal', {
-            //     loop: true,
-            //     pagination: {
-            //         el: '.horizonal-button-next',
-            //         clickable: true,
-            //     },
-            //     navigation: {
-            //         nextEl: '.horizonal-button-next',
-            //         prevEl: '.horizonal-button-prev',
-            //     }
-            // })
+            var swiper = new Swiper('.horizonal', {
+                loop: true,
+                pagination: {
+                    el: '.horizonal-button-next',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.horizonal-button-next',
+                    prevEl: '.horizonal-button-prev',
+                }
+            })
         })
     }
 

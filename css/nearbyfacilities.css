@@ -1,0 +1,37 @@
+    .gm-style-iw-d,
+    .gm-style-iw {
+        min-height: 180px;
+        overflow: hidden !important;
+    }
+
+    .gm-style-iw div {
+        overflow: hidden !important;
+    }
+
+    .gm-style-iw .facilitiesinfo {
+        height: 250px;
+    }
+
+    .gm-style-iw .facilitiesinfo .facilityName {
+        padding: 5px;
+        overflow: hidden !important;
+        font-weight: bold;
+        font-size: unset;
+    }
+
+    .gm-style-iw .swiper-container {
+        width: 277px;
+        height: 120px;
+    }
+
+    .gm-style-iw .swiper-container .swiper-wrapper {
+        width: 262px;
+        height: 104px;
+    }
+
+    .gm-style-iw .swiper-container .swiper-wrapper .swiper-slide {
+        height: 104px;
+        background-size: cover;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+    }

@@ -88,7 +88,6 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public function show_about_plugin() {
-		$api_key     = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		$types_array = array(
 			'restaurant'              => __( 'Restaurant', 'NearbyFacilities' ),
 			'accounting'              => __( 'Accounting', 'NearbyFacilities' ),
@@ -185,8 +184,36 @@ class NearbyFacilities {
 			'veterinary_care'         => __( 'Veterinary care', 'NearbyFacilities' ),
 			'zoo'                     => __( 'Zoo', 'NearbyFacilities' ),
 		);
-		wp_admin_css_uri( 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/css/swiper.min.css' );
+		wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
+		wp_enqueue_style( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'css/nearbyfacilities.css', array(), true );
+		add_action( 'admin_print_scripts', 'NearbyFacilities::add_about_script' );
 		include self::PLUGIN_DIR . 'html/about.phtml';
+	}
+
+	/**
+	 * Func add_about_script
+	 *
+	 * @return void
+	 */
+	public static function add_about_script() {
+		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
+		wp_enqueue_script( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'js/nearbyfacilities.js', array(), true, false );
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		if ( WP_Filesystem() ) {
+			global $wp_filesystem;
+			$data = $wp_filesystem->get_contents( self::PLUGIN_DIR . 'js/about.inline' );
+		}
+		$data       = preg_replace_callback(
+			"/<%%\('(.*)'\)%%>/",
+			function ( $match ) {
+				return __( $match[1], 'NearbyFacilities' );
+			},
+			$data
+		);
+		$data       = str_replace( '<%%user_locale%%>', substr( get_user_locale(), 0, 2 ), $data );
+		$googleapis = 'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=nearbyfacilities';
+		wp_enqueue_script( 'google_maps_api', $googleapis, array(), true, true );
+		wp_add_inline_script( 'google_maps_api', $data, 'befor' );
 	}
 
 	/**
@@ -206,10 +233,22 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public static function nearbymap_shortcode( array $atts ) {
-		global $post_type;
-		if ( strpos( $_SERVER['REQUEST_URI'], 'action=edit' ) || strpos( $_SERVER['REQUEST_URI'], 'rest_route=') || strpos( $_SERVER['REQUEST_URI'], 'wp-json' ) ) {
-			return;
+		if ( is_page() || is_single() || is_singular() || is_front_page() || is_home() ) {
+			self::execute_shortcode( $atts );
 		}
+	}
+
+	/**
+	 * Func execute_shortcode
+	 *
+	 * @param  array $atts       shortcode attr.
+	 * @return void
+	 */
+	public static function execute_shortcode( array $atts ) {
+		// global $post_type;
+		// if ( strpos( $_SERVER['REQUEST_URI'], 'action=edit' ) || strpos( $_SERVER['REQUEST_URI'], 'rest_route=') || strpos( $_SERVER['REQUEST_URI'], 'wp-json' ) ) {
+		// 	return;
+		// }
 		$default = array(
 			'address'  => false,
 			'width'    => '100%',

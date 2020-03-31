@@ -39,7 +39,9 @@
 add_action( 'plugins_loaded', 'load_lang_strings' );
 require_once plugin_dir_path( __FILE__ ) . 'class-nearbyfacilities.php';
 add_action( 'init', 'NearbyFacilities::init' );
+add_action( 'admin_print_scripts', 'NearbyFacilities::add_about_script' );
 add_shortcode( 'nearbyFacilities', 'NearbyFacilities::nearbymap_shortcode' );
+// wp_register_script( 'nearbyfacilities', false );
 
 /**
  * Func load_lang_strings
