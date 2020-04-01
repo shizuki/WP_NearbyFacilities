@@ -1,7 +1,7 @@
 <div class="nearby_facilities_map-container">
     <div id="<?php echo esc_attr($map_id); ?>" class="nearby_facilities_map-container-inner" style="width:<?php echo esc_attr($atts['width']) ?>; height:<?php echo esc_attr($atts['height']) ?>;"></div>
 </div>
-<script src="<?php echo plugin_dir_url(__FILE__) ?>../js/getshortcodeclass.js"></script>
+<script src="<?php echo plugin_dir_url(__FILE__) ?>../js/nearbyfacilities.js"></script>
 <script type="text/javascript">
     const container_id = '<?php echo $map_id; ?>';
     const shortcodeLat = Number('<?php echo $coordinates['lat']; ?>');

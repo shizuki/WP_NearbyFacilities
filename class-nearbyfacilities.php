@@ -201,19 +201,30 @@ class NearbyFacilities {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		if ( WP_Filesystem() ) {
 			global $wp_filesystem;
-			$data = $wp_filesystem->get_contents( self::PLUGIN_DIR . 'js/about.inline' );
+			$data = $wp_filesystem->get_contents( self::PLUGIN_DIR . 'js/admin.inline.js' );
 		}
-		$data       = preg_replace_callback(
+		$data       = self::replace_localize( $data );
+		$googleapis = 'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=nearbyfacilities';
+		wp_enqueue_script( 'google_maps_api', $googleapis, array(), true, true );
+		wp_add_inline_script( 'google_maps_api', $data, 'befor' );
+	}
+
+	/**
+	 * Func replace_localize
+	 *
+	 * @param string $data String data read from an external file.
+	 * @return string A translation of the received data with the translation replaced.
+	 */
+	public function replace_localize( string $data ): string {
+		$data = preg_replace_callback(
 			"/<%%\('(.*)'\)%%>/",
 			function ( $match ) {
 				return __( $match[1], 'NearbyFacilities' );
 			},
 			$data
 		);
-		$data       = str_replace( '<%%user_locale%%>', substr( get_user_locale(), 0, 2 ), $data );
-		$googleapis = 'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=nearbyfacilities';
-		wp_enqueue_script( 'google_maps_api', $googleapis, array(), true, true );
-		wp_add_inline_script( 'google_maps_api', $data, 'befor' );
+		$data = str_replace( '<%%user_locale%%>', substr( get_user_locale(), 0, 2 ), $data );
+		return $data;
 	}
 
 	/**
@@ -245,10 +256,6 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public static function execute_shortcode( array $atts ) {
-		// global $post_type;
-		// if ( strpos( $_SERVER['REQUEST_URI'], 'action=edit' ) || strpos( $_SERVER['REQUEST_URI'], 'rest_route=') || strpos( $_SERVER['REQUEST_URI'], 'wp-json' ) ) {
-		// 	return;
-		// }
 		$default = array(
 			'address'  => false,
 			'width'    => '100%',
