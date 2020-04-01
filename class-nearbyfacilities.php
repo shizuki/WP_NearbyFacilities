@@ -186,7 +186,7 @@ class NearbyFacilities {
 		);
 		wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
 		wp_enqueue_style( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'css/nearbyfacilities.css', array(), true );
-		add_action( 'admin_print_scripts', 'NearbyFacilities::add_about_script' );
+		add_action('admin_print_scripts-toplevel_page_NearbyFacilities', 'NearbyFacilities::add_about_script' );
 		include self::PLUGIN_DIR . 'html/about.phtml';
 	}
 
@@ -196,6 +196,11 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public static function add_about_script() {
+		global $hook_suffix;
+		if ( 'toplevel_page_NearbyFacilities' !== $hook_suffix ) {
+			return;
+		}
+		echo "<h1>$hook_suffix</h1>";
 		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		wp_enqueue_script( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'js/nearbyfacilities.js', array(), true, false );
 		require_once ABSPATH . 'wp-admin/includes/file.php';
