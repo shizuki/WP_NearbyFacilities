@@ -14,6 +14,7 @@
     const defLang = '<%%user_locale%%>'
     let placesList
     let map // = []
+    const copy_notice = '<%%copy_notice%%>'
     const defMapID = 'shortcodeMap'
     const mapField = document.getElementById("shortcodeMap")
     const marker = []
@@ -47,7 +48,23 @@
     function copyShortCode() {
         document.getElementById("shortCode").select()
         document.execCommand("Copy")
-        alert(`Shortcode(${document.getElementById("shortCode").value}) copied to clipboard`)
+        const notice = document.getElementById("copy_notice")
+        const text_value = copy_notice.replace("%s", document.getElementById("shortCode").value)
+        const span = document.createElement('span')
+        span.style.position = 'absolute';
+        span.style.top = '-1000px';
+        span.style.left = '-1000px';
+        span.style.whiteSpace = 'nowrap'
+        span.innerText = text_value
+        document.body.appendChild(span)
+        const notice_width = span.clientWidth + 20 + 'px'
+        notice.innerText = text_value
+        notice.style.width = notice_width
+        notice.classList.add('is-show')
+        var timer = setTimeout(() => {
+            notice.classList.remove('is-show')
+        }, 5000)
+        // alert(`Shortcode(${document.getElementById("shortCode").value}) copied to clipboard`)
     }
 
     function showZoomVal() {

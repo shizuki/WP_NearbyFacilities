@@ -228,6 +228,7 @@ class NearbyFacilities {
 			$data
 		);
 		$data = str_replace( '<%%user_locale%%>', substr( get_user_locale(), 0, 2 ), $data );
+		$data = str_replace( '<%%copy_notice%%>', __( 'Shortcode [%s] copied to clipboard.', 'NearbyFacilities' ), $data );
 		return $data;
 	}
 
