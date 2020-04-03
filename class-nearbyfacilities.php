@@ -61,6 +61,7 @@ class NearbyFacilities {
 			add_action( 'admin_menu', array( $this, 'set_plugin_menu' ) );
 			add_action( 'admin_menu', array( $this, 'set_plugin_sub_menu' ) );
 			add_action( 'admin_init', array( $this, 'save_config' ) );
+			add_action( 'admin_print_scripts-toplevel_page_NearbyFacilities', array( $this, 'add_about_script' ) );
 		}
 	}
 
@@ -79,7 +80,7 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public function set_plugin_sub_menu() {
-		add_submenu_page( 'NearbyFacilities', 'Config', 'Config', 'manage_options', 'NearbyFacilities-config', array( $this, 'show_config_form' ) );
+		add_submenu_page( 'NearbyFacilities', 'Settings', __( 'Settings' ), 'manage_options', 'NearbyFacilities-Settings', array( $this, 'show_config_form' ) );
 	}
 
 	/**
@@ -183,12 +184,11 @@ class NearbyFacilities {
 			'university'              => __( 'University', 'NearbyFacilities' ),
 			'veterinary_care'         => __( 'Veterinary care', 'NearbyFacilities' ),
 			'zoo'                     => __( 'Zoo', 'NearbyFacilities' ),
-		);
+		);// end $types_array.
 		wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
 		wp_enqueue_style( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'css/nearbyfacilities.css', array(), true );
-		add_action( 'admin_print_scripts-toplevel_page_NearbyFacilities', 'NearbyFacilities::add_about_script' );
 		include self::PLUGIN_DIR . 'html/about.phtml';
-	}
+	} // end show_about_plugin.
 
 	/**
 	 * Func add_about_script
@@ -200,7 +200,6 @@ class NearbyFacilities {
 		if ( 'toplevel_page_NearbyFacilities' !== $hook_suffix ) {
 			return;
 		}
-		echo "<h1>$hook_suffix</h1>";
 		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		wp_enqueue_script( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'js/nearbyfacilities.js', array(), true, false );
 		require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -238,6 +237,7 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public function show_config_form() {
+		$message = get_transient( self::COMPLETE_CONFIG );
 		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		include self::PLUGIN_DIR . 'html/config-form.phtml';
 	}
@@ -326,7 +326,7 @@ class NearbyFacilities {
 			$data = $coordinates;
 		}
 		return $data;
-	}
+	} // get_coordinates
 
 	/**
 	 * Func save_config
@@ -334,12 +334,13 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public function save_config() {
+		global $pagenow;
 		if ( isset( $_POST[ self::CREDENTIAL_NAME ] ) && sanitize_text_field( wp_unslash( $_POST[ self::CREDENTIAL_NAME ] ) ) ) {
 			if ( check_admin_referer( self::CREDENTIAL_ACTION, self::CREDENTIAL_NAME ) ) {
 				$api_key_key = self::PLUGIN_DB_PREFIX . 'api_key';
 				$api_key     = isset( $_POST['api_key'] ) ? sanitize_text_field( wp_unslash( $_POST['api_key'] ) ) : '';
 				update_option( $api_key_key, $api_key );
-				$completed_text = 'API key saved';
+				$completed_text = __( 'API key registration has been updated.', 'NearbyFacilities' );
 				set_transient( self::COMPLETE_CONFIG, $completed_text, 5 );
 				wp_safe_redirect( menu_page_url( self::CONFIG_MENU_SLUG, false ) );
 			}

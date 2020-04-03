@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: WordPress VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-02-27 17:11-0600\n"
-"PO-Revision-Date: 2020-03-29 15:17+0900\n"
+"PO-Revision-Date: 2020-04-03 18:04+0900\n"
 "Last-Translator: Hikaru Shizuki shizuki17xx@gmail.com\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -458,3 +458,19 @@ msgstr ""
 #: html/about.phtml:33
 msgid "submit"
 msgstr "決定"
+
+#: html/config-form.phtml:2
+msgid "Configring for Plugin."
+msgstr "プラグインの設定。"
+
+#: html/config-form.phtml:3
+msgid "Registration of Google Maps API key."
+msgstr "Google Maps APIキーの登録。"
+
+#: html/config-form.phtml:7
+msgid "Google Maps API key"
+msgstr "Google Maps APIキー"
+
+#: class-nearbyfacilities.php:343
+msgid "API key registration has been updated."
+msgstr "APIキーの登録を更新しました。"
