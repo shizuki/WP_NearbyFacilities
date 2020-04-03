@@ -273,13 +273,13 @@ class NearbyFacilities {
 			'fRefresh' => false,
 		);
 		$atts    = shortcode_atts( $default, $atts );
-		if ( $atts['address'] ) {
-			$coordinates = self::get_coordinates( $atts['address'], $atts['fRefresh'] );
-			if ( array_key_exists( 'error', $coordinates ) ) {
-				return;
-			}
-			$map_id = uniqid( 'NearbyFacilities_' );
-		}
+		// if ( $atts['address'] ) {
+		// 	$coordinates = self::get_coordinates( $atts['address'], $atts['fRefresh'] );
+		// 	if ( array_key_exists( 'error', $coordinates ) ) {
+		// 		return;
+		// 	}
+		// }
+		$map_id = uniqid( 'NearbyFacilities_' );
 		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		include self::PLUGIN_DIR . 'html/nearbyfacilitiesmap.phtml';
 	}
@@ -291,43 +291,54 @@ class NearbyFacilities {
 	 * @param  boolean $force_refresh Refresh flag.
 	 * @return array|null
 	 */
-	public static function get_coordinates( string $address, bool $force_refresh = false ): ?array {
-		$address_hash = md5( $address );
-		$coordinates  = get_option( self::PLUGIN_DB_PREFIX . '_' . $address_hash );
-		if ( $force_refresh || false === $coordinates ) {
-			$args     = array(
-				'key'     => get_option( self::PLUGIN_DB_PREFIX . 'api_key' ),
-				'address' => rawurlencode( $address ),
-			);
-			$url      = add_query_arg( $args, 'https://maps.googleapis.com/maps/api/geocode/json' );
-			$response = wp_remote_get( $url );
-			if ( is_wp_error( $response ) ) {
-				return null;
-			}
-			$data = wp_remote_retrieve_body( $response );
-			if ( is_wp_error( $data ) ) {
-				return null;
-			}
-			if ( 200 === intval( $response['response']['code'] ) ) {
-				$data = json_decode( $data );
-				if ( 'ok' === strtolower( $data->status ) ) {
-					$coordinates            = $data->results[0]->geometry->location;
-					$cache_value['lat']     = $coordinates->lat;
-					$cache_value['lng']     = $coordinates->lng;
-					$cache_value['address'] = (string) $data->results[0]->formatted_address;
-					update_option( self::PLUGIN_DB_PREFIX . '_' . $address_hash, $cache_value );
-					$data = $cache_value;
-				} else {
-					return array( 'error' => __( 'Something went wrong while retrieving your map, please ensure you have entered the short code correctly.', 'NearbyFacilities' ) );
-				}
-			} else {
-				return array( 'error' => __( 'Unable to contact Google API service.', 'NearbyFacilities' ) );
-			}
-		} else {
-			$data = $coordinates;
-		}
-		return $data;
-	} // get_coordinates
+	// public static function get_coordinates( string $address, bool $force_refresh = false ): ?array {
+	// 	$address_hash = md5( $address );
+	// 	$coordinates  = get_option( self::PLUGIN_DB_PREFIX . '_' . $address_hash );
+	// 	// $options = [
+	// 	// 	CURLOPT_REFERER => 'http://shizuki.kinezumi.net/',
+	// 	// 	CURLOPT_URL => 'https://maps.googleapis.com/maps/api/geocode/json' . '?key=' . get_option(self::PLUGIN_DB_PREFIX . 'api_key') . '&address=' . rawurlencode($address),
+	// 	// 	CURLOPT_RETURNTRANSFER => true,
+	// 	// 	CURLOPT_SSL_VERIFYPEER => false,
+	// 	// ];
+	// 	// $curl = curl_init();
+	// 	// curl_setopt_array($curl, $options);
+	// 	// $result = curl_exec($curl);
+	// 	// curl_close($curl);
+	// 	// var_dump($result);exit;
+	// 	if ( $force_refresh || false === $coordinates ) {
+	// 		$args     = array(
+	// 			'key'     => get_option( self::PLUGIN_DB_PREFIX . 'api_key' ),
+	// 			'address' => rawurlencode( $address ),
+	// 		);
+	// 		$url      = add_query_arg( $args, 'https://maps.googleapis.com/maps/api/geocode/json' );
+	// 		$response = wp_remote_get( $url );
+	// 		if ( is_wp_error( $response ) ) {
+	// 			return null;
+	// 		}
+	// 		$data = wp_remote_retrieve_body( $response );
+	// 		if ( is_wp_error( $data ) ) {
+	// 			return null;
+	// 		}
+	// 		if ( 200 === intval( $response['response']['code'] ) ) {
+	// 			$data = json_decode( $data );
+	// 			if ( 'ok' === strtolower( $data->status ) ) {
+	// 				$coordinates            = $data->results[0]->geometry->location;
+	// 				$cache_value['lat']     = $coordinates->lat;
+	// 				$cache_value['lng']     = $coordinates->lng;
+	// 				$cache_value['address'] = (string) $data->results[0]->formatted_address;
+	// 				update_option( self::PLUGIN_DB_PREFIX . '_' . $address_hash, $cache_value );
+	// 				$data = $cache_value;
+	// 			} else {
+	// 				return array( 'error' => __( 'Something went wrong while retrieving your map, please ensure you have entered the short code correctly.', 'NearbyFacilities' ) );
+	// 			}
+	// 		} else {
+	// 			return array( 'error' => __( 'Unable to contact Google API service.', 'NearbyFacilities' ) );
+	// 		}
+	// 	} else {
+	// 		$data = $coordinates;
+	// 	}
+	// 	return $data;
+	// } // get_coordinates
 
 	/**
 	 * Func save_config
