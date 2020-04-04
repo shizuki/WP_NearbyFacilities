@@ -8,7 +8,7 @@ Markers are displayed on the Google Map at the location specified by the short c
 ### Usage
 1. Obtain the key by referring to the following pages, etc., and enable the three APIs of Geocoding API, Maps JavaScript API, Places API.
     [https://qiita.com/k2999/items/a9f41ea697a4f955ec1c]
-1. Go to the setting screen from "Nearby Facilities-> Config" on the menu bar and enter your Google API key.
+1. Go to the setting screen from "Nearby Facilities-> Settings" on the menu bar and enter your Google API key.
 1. Also enter the map setting screen in the "Nearby Facilities" menu and set the option values.
 1. Click "Submit" and a shortcode will appear in the text box below the map that reflects your options.
 1. Click the text box to copy the displayed shortcode to the clipboard, and paste it into the article.  
