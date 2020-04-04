@@ -1,4 +1,4 @@
-class getShortCode {
+class searchNearbyFacilities {
 
     constructor() {
         // this.Map = null

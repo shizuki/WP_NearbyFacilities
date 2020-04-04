@@ -2,6 +2,7 @@
     let typeInput
     let radiusInput
     let zoomInput
+    let addressInput
     const obj = document.getElementById("radiusInput")
     const searchErrors = {
         "zero_results": "<%%('Zero results.')%%>",
@@ -14,22 +15,23 @@
     const defLang = '<%%user_locale%%>'
     let placesList
     let map // = []
-    const copy_notice = '<%%copy_notice%%>'
-    const defMapID = 'shortcodeMap'
-    const mapField = document.getElementById("shortcodeMap")
+    <%%copy_notice%%>
+    const defMapID = '<%%shortcodeMap%%>'
+    const mapField = document.getElementById(defMapID)
     const marker = []
     const infoWindow = []
 
     function nearbyfacilities() {
-        const mapi = new getShortCode(defMapID)
+        const mapi = new searchNearbyFacilities(defMapID)
+        addressInput = document.getElementById("addressInput").value
         keywordInput = document.getElementById("keywordInput").value
-        typeInput = document.getElementById("typeInput").value
-        radiusInput = Number(document.getElementById("radiusInput").value)
-        zoomInput = Number(document.getElementById("zoomInput").value)
-        mapi.getPlaces(document.getElementById("addressInput").value)
+        typeInput    = document.getElementById("typeInput").value
+        radiusInput  = Number(document.getElementById("radiusInput").value)
+        zoomInput    = Number(document.getElementById("zoomInput").value)
+        mapi.getPlaces(addressInput)
     }
 
-    function getSrotCode() {
+    function makeShortCode() {
         document.getElementById("shortCode").readOnly = false
         let code = '[nearbyFacilities ' +
             `address="${document.getElementById("addressInput").value}" ` +
@@ -64,7 +66,6 @@
         var timer = setTimeout(() => {
             notice.classList.remove('is-show')
         }, 5000)
-        // alert(`Shortcode(${document.getElementById("shortCode").value}) copied to clipboard`)
     }
 
     function showZoomVal() {

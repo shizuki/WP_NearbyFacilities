@@ -205,21 +205,22 @@ class NearbyFacilities {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		if ( WP_Filesystem() ) {
 			global $wp_filesystem;
-			$data = $wp_filesystem->get_contents( self::PLUGIN_DIR . 'js/admin.inline.js' );
+			$data = $wp_filesystem->get_contents( self::PLUGIN_DIR . 'js/inline-script.js' );
 		}
-		$data       = self::replace_localize( $data );
+		$data       = self::replace_default_value( $data, 'shortcodeMap', true );
 		$googleapis = 'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=nearbyfacilities';
 		wp_enqueue_script( 'google_maps_api', $googleapis, array(), true, true );
 		wp_add_inline_script( 'google_maps_api', $data, 'befor' );
 	}
 
 	/**
-	 * Func replace_localize
+	 * Func replace_default_value
 	 *
-	 * @param string $data String data read from an external file.
+	 * @param string $data  String data read from an external file.
+	 * @param bool   $admin Flag that represents the output on the admin screen.
 	 * @return string A translation of the received data with the translation replaced.
 	 */
-	public function replace_localize( string $data ): string {
+	public function replace_default_value( string $data, string $map_id, bool $is_admin = false ): string {
 		$data = preg_replace_callback(
 			"/<%%\('(.*)'\)%%>/",
 			function ( $match ) {
@@ -227,8 +228,13 @@ class NearbyFacilities {
 			},
 			$data
 		);
-		$data = str_replace( '<%%user_locale%%>', substr( get_user_locale(), 0, 2 ), $data );
-		$data = str_replace( '<%%copy_notice%%>', __( 'Shortcode [%s] copied to clipboard.', 'NearbyFacilities' ), $data );
+		$copy_notice = $is_admin ?
+							'const copy_notice = \'' . __( 'Shortcode [%s] copied to clipboard.', 'NearbyFacilities' ) . '\'' :
+							'';
+		$data        = str_replace( '<%%user_locale%%>', substr( get_user_locale(), 0, 2 ), $data );
+		$data        = str_replace( '<%%shortcodeMap%%>', $map_id, $data );
+		$data        = str_replace( '<%%copy_notice%%>', $copy_notice, $data );
+		$data        = str_replace( '<%%shortcodeMap%%>', $map_id, $data );
 		return $data;
 	}
 
@@ -270,7 +276,7 @@ class NearbyFacilities {
 			'type'     => false,
 			'radius'   => 500,
 			'keyword'  => '',
-			'fRefresh' => false,
+			// 'fRefresh' => false,
 		);
 		$atts    = shortcode_atts( $default, $atts );
 		// if ( $atts['address'] ) {
