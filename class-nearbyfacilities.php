@@ -281,12 +281,13 @@ class NearbyFacilities {
 			$data
 		);
 		$copy_notice = true === $is_admin ?
+							// TRANSLATORS: %s should be left as is. The program changes.
 							'const copy_notice = \'' . __( 'Shortcode [%s] copied to clipboard.', 'NearbyFacilities' ) . '\'' :
 							'';
 		$replace_pairs['<%%user_locale%%>']  = substr( get_user_locale(), 0, 2 );
 		$replace_pairs['<%%shortcodeMap%%>'] = $map_id;
 		$replace_pairs['<%%copy_notice%%>']  = $copy_notice;
-		$data        = strtr( $data, $replace_pairs );
+		$data                                = strtr( $data, $replace_pairs );
 		if ( $is_admin ) {
 			require_once ABSPATH . 'wp-admin/includes/file.php';
 			if ( WP_Filesystem() ) {
