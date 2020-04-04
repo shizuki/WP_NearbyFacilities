@@ -62,7 +62,44 @@ class NearbyFacilities {
 			add_action( 'admin_menu', array( $this, 'set_plugin_sub_menu' ) );
 			add_action( 'admin_init', array( $this, 'save_config' ) );
 			add_action( 'admin_print_scripts-toplevel_page_NearbyFacilities', array( $this, 'add_about_script' ) );
+			add_action( 'admin_print_styles-toplevel_page_NearbyFacilities', array( $this, 'add_about_styles' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'include_scripts' ) );
 		}
+	}
+
+	/**
+	 * Func add_about_styles
+	 *
+	 * @return void
+	 */
+	public function add_about_styles() {
+		global $hook_suffix;
+		if ( 'toplevel_page_NearbyFacilities' !== $hook_suffix ) {
+			return;
+		}
+		echo '<style>
+    .inputLabel {
+        margin-bottom: 5px;
+    }
+</style>';
+	}
+
+	/**
+	 * Func include_scripts
+	 *
+	 * @return void
+	 */
+	public function include_scripts() {
+		global $hook_suffix;
+		if ( 'toplevel_page_NearbyFacilities' !== $hook_suffix && ! is_page() && ! is_single() && ! is_singular() && ! is_front_page() && ! is_home() ) {
+			return;
+		}
+		$api_key    = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
+		$googleapis = 'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=nearbyfacilities';
+		wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
+		wp_enqueue_style( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'css/nearbyfacilities.css', array(), true );
+		wp_enqueue_script( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'js/nearbyfacilities.js', array(), true, false );
+		wp_enqueue_script( 'google_maps_api', $googleapis, array(), true, true );
 	}
 
 	/**
@@ -217,18 +254,12 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	private function print_inline_script( string $map_id, array $replace_pairs, bool $is_admin = false ) {
-		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
-		wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
-		wp_enqueue_style( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'css/nearbyfacilities.css', array(), true );
-		wp_enqueue_script( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'js/nearbyfacilities.js', array(), true, false );
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		if ( WP_Filesystem() ) {
 			global $wp_filesystem;
 			$data = $wp_filesystem->get_contents( self::PLUGIN_DIR . 'js/inline-script.js' );
 		}
-		$data       = self::replace_default_value( $data, $map_id, $replace_pairs, $is_admin );
-		$googleapis = 'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=nearbyfacilities';
-		wp_enqueue_script( 'google_maps_api', $googleapis, array(), true, true );
+		$data = self::replace_default_value( $data, $map_id, $replace_pairs, $is_admin );
 		wp_add_inline_script( 'google_maps_api', $data, 'befor' );
 	}
 
@@ -249,7 +280,7 @@ class NearbyFacilities {
 			},
 			$data
 		);
-		$copy_notice = $is_admin ?
+		$copy_notice = true === $is_admin ?
 							'const copy_notice = \'' . __( 'Shortcode [%s] copied to clipboard.', 'NearbyFacilities' ) . '\'' :
 							'';
 		$replace_pairs['<%%user_locale%%>']  = substr( get_user_locale(), 0, 2 );
@@ -297,24 +328,25 @@ class NearbyFacilities {
 	 */
 	public static function execute_shortcode( array $atts ) {
 		$default = array(
-			'address'  => false,
-			'width'    => '100%',
-			'height'   => '300px',
-			'zoom'     => 17,
-			'type'     => false,
-			'radius'   => 500,
-			'keyword'  => '',
+			'address' => false,
+			'width'   => '100%',
+			'height'  => '300px',
+			'zoom'    => 17,
+			'type'    => false,
+			'radius'  => 500,
+			'keyword' => '',
 		);
 		$atts    = shortcode_atts( $default, $atts );
 		$map_id  = uniqid( 'NearbyFacilities_' );
-		$replace_pairs = array(
+		$replace = array(
 			'<%%addressInput%%>' => '\'' . $atts['address'] . '\'',
 			'<%%keywordInput%%>' => '\'' . $atts['keyword'] . '\'',
 			'<%%radiusInput%%>'  => intVal( $atts['radius'] ),
 			'<%%typeInput%%>'    => '[\'' . $atts['type'] . '\']',
 			'<%%zoomInput%%>'    => intVal( $atts['zoom'] ),
 		);
-		self::print_inline_script( $map_id, $replace_pairs );
+		self::include_scripts();
+		self::print_inline_script( $map_id, $replace );
 		include self::PLUGIN_DIR . 'html/nearbyfacilitiesmap.phtml';
 	}
 
