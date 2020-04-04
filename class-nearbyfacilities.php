@@ -200,6 +200,25 @@ class NearbyFacilities {
 		if ( 'toplevel_page_NearbyFacilities' !== $hook_suffix ) {
 			return;
 		}
+		$replace = array(
+			'<%%addressInput%%>' => 'document.getElementById("addressInput").value',
+			'<%%keywordInput%%>' => 'document.getElementById("keywordInput").value',
+			'<%%radiusInput%%>'  => 'Number(document.getElementById("radiusInput").value)',
+			'<%%typeInput%%>'    => 'document.getElementById("typeInput").value',
+			'<%%zoomInput%%>'    => 'Number(document.getElementById("zoomInput").value)',
+		);
+		self::print_inline_script( 'shortcodeMap', $replace, true );
+	}
+
+	/**
+	 * Func print_inline_script
+	 *
+	 * @param  string $map_id        Id of the div box that displays the map.
+	 * @param  array  $replace_pairs An associative array of the replacement target and the replacement string.
+	 * @param  bool   $is_admin      Flag that represents the output on the admin screen.
+	 * @return void
+	 */
+	private function print_inline_script( string $map_id, array $replace_pairs, bool $is_admin = false ) {
 		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		wp_enqueue_script( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'js/nearbyfacilities.js', array(), true, false );
 		require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -207,7 +226,7 @@ class NearbyFacilities {
 			global $wp_filesystem;
 			$data = $wp_filesystem->get_contents( self::PLUGIN_DIR . 'js/inline-script.js' );
 		}
-		$data       = self::replace_default_value( $data, 'shortcodeMap', true );
+		$data       = self::replace_default_value( $data, $map_id, $replace_pairs, $is_admin );
 		$googleapis = 'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=nearbyfacilities';
 		wp_enqueue_script( 'google_maps_api', $googleapis, array(), true, true );
 		wp_add_inline_script( 'google_maps_api', $data, 'befor' );
@@ -216,12 +235,14 @@ class NearbyFacilities {
 	/**
 	 * Func replace_default_value
 	 *
-	 * @param string $data  String data read from an external file.
-	 * @param bool   $admin Flag that represents the output on the admin screen.
+	 * @param string $data          String data read from an external file.
+	 * @param string $map_id        Id of the div box that displays the map.
+	 * @param array  $replace_pairs An associative array of the replacement target and the replacement string.
+	 * @param bool   $is_admin      Flag that represents the output on the admin screen.
 	 * @return string A translation of the received data with the translation replaced.
 	 */
-	public function replace_default_value( string $data, string $map_id, bool $is_admin = false ): string {
-		$data = preg_replace_callback(
+	private function replace_default_value( string $data, string $map_id, array $replace_pairs, bool $is_admin = false ): string {
+		$data        = preg_replace_callback(
 			"/<%%\('(.*)'\)%%>/",
 			function ( $match ) {
 				return __( $match[1], 'NearbyFacilities' );
@@ -231,10 +252,17 @@ class NearbyFacilities {
 		$copy_notice = $is_admin ?
 							'const copy_notice = \'' . __( 'Shortcode [%s] copied to clipboard.', 'NearbyFacilities' ) . '\'' :
 							'';
-		$data        = str_replace( '<%%user_locale%%>', substr( get_user_locale(), 0, 2 ), $data );
-		$data        = str_replace( '<%%shortcodeMap%%>', $map_id, $data );
-		$data        = str_replace( '<%%copy_notice%%>', $copy_notice, $data );
-		$data        = str_replace( '<%%shortcodeMap%%>', $map_id, $data );
+		$replace_pairs['<%%user_locale%%>']  = substr( get_user_locale(), 0, 2 );
+		$replace_pairs['<%%shortcodeMap%%>'] = $map_id;
+		$replace_pairs['<%%copy_notice%%>']  = $copy_notice;
+		$data        = strtr( $data, $replace_pairs );
+		if ( $is_admin ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			if ( WP_Filesystem() ) {
+				global $wp_filesystem;
+				$data .= $wp_filesystem->get_contents( self::PLUGIN_DIR . 'js/inline-admin.js' );
+			}
+		}
 		return $data;
 	}
 
@@ -278,8 +306,16 @@ class NearbyFacilities {
 			'keyword'  => '',
 		);
 		$atts    = shortcode_atts( $default, $atts );
-		$map_id = uniqid( 'NearbyFacilities_' );
-		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
+		$map_id  = uniqid( 'NearbyFacilities_' );
+		$replace_pairs = array(
+			'<%%addressInput%%>' => '\'' . $atts['address'] . '\'',
+			'<%%keywordInput%%>' => '\'' . $atts['keyword'] . '\'',
+			'<%%radiusInput%%>'  => intVal( $atts['radius'] ),
+			'<%%typeInput%%>'    => '[\'' . $atts['type'] . '\']',
+			'<%%zoomInput%%>'    => intVal( $atts['zoom'] ),
+		);
+		self::print_inline_script( $map_id, $replace_pairs );
+		// $api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		include self::PLUGIN_DIR . 'html/nearbyfacilitiesmap.phtml';
 	}
 
