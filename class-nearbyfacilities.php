@@ -185,8 +185,6 @@ class NearbyFacilities {
 			'veterinary_care'         => __( 'Veterinary care', 'NearbyFacilities' ),
 			'zoo'                     => __( 'Zoo', 'NearbyFacilities' ),
 		);// end $types_array.
-		wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
-		wp_enqueue_style( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'css/nearbyfacilities.css', array(), true );
 		include self::PLUGIN_DIR . 'html/about.phtml';
 	} // end show_about_plugin.
 
@@ -220,6 +218,8 @@ class NearbyFacilities {
 	 */
 	private function print_inline_script( string $map_id, array $replace_pairs, bool $is_admin = false ) {
 		$api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
+		wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
+		wp_enqueue_style( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'css/nearbyfacilities.css', array(), true );
 		wp_enqueue_script( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'js/nearbyfacilities.js', array(), true, false );
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		if ( WP_Filesystem() ) {
@@ -315,7 +315,6 @@ class NearbyFacilities {
 			'<%%zoomInput%%>'    => intVal( $atts['zoom'] ),
 		);
 		self::print_inline_script( $map_id, $replace_pairs );
-		// $api_key = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		include self::PLUGIN_DIR . 'html/nearbyfacilitiesmap.phtml';
 	}
 
