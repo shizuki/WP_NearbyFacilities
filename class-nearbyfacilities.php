@@ -357,7 +357,8 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public function save_config() {
-		global $pagenow;
+		// global $wp_query, $pagenow;
+		// var_dump($wp_query);exit;
 		if ( isset( $_POST[ self::CREDENTIAL_NAME ] ) && sanitize_text_field( wp_unslash( $_POST[ self::CREDENTIAL_NAME ] ) ) ) {
 			if ( check_admin_referer( self::CREDENTIAL_ACTION, self::CREDENTIAL_NAME ) ) {
 				$api_key_key = self::PLUGIN_DB_PREFIX . 'api_key';
