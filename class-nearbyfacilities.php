@@ -32,7 +32,7 @@
  * @since 1.0.0
  */
 class NearbyFacilities {
-	public const VERSION           = '1.0.0';
+	public const VERSION           = '1.0.2';
 	public const PLUGIN_ID         = 'NearbyFacilities';
 	public const CREDENTIAL_ACTION = self::PLUGIN_ID . '-nonce-action';
 	public const CREDENTIAL_NAME   = self::PLUGIN_ID . '-nonce-key';

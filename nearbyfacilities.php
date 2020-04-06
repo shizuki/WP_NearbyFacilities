@@ -11,7 +11,7 @@
  * Plugin Name: WP_NearbyFacilities
  * Plugin URI: http://shizuki.kinezumi.net/2020/04/05/wp-nearbyfacilities/
  * Description: Display markers at facilities near the specified point in googlemaps.
- * Version: 0.1
+ * Version: 1.0.2
  * Author: shizuki
  * Author URI: http://shizuki.kinezumi.net/about/
  * License: GPLv2
