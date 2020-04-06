@@ -96,8 +96,9 @@ class NearbyFacilities {
 		}
 		$api_key    = get_option( self::PLUGIN_DB_PREFIX . 'api_key' );
 		$googleapis = 'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=nearbyfacilities';
-		wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
+		// wp_enqueue_style( 'swiper', plugin_dir_url( __FILE__ ) . 'css/swiper.min.css', array(), true );
 		wp_enqueue_style( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'css/nearbyfacilities.css', array(), true );
+		// wp_enqueue_script( 'swiper', plugin_dir_url( __FILE__ ) . 'js/swiper.min.js', array(), true, false );
 		wp_enqueue_script( 'nearbyfacilities', plugin_dir_url( __FILE__ ) . 'js/nearbyfacilities.js', array(), true, false );
 		wp_enqueue_script( 'google_maps_api', $googleapis, array(), true, true );
 	}

@@ -209,17 +209,17 @@ class searchNearbyFacilities {
             setTimeout(this.switchBounceMotion, 2500, cnt)
         })
         google.maps.event.addListener(infoWindow[cnt], "domready", () => {
-            var swiper = new Swiper('.horizonal', {
-                loop: true,
-                pagination: {
-                    el: '.horizonal-button-next',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.horizonal-button-next',
-                    prevEl: '.horizonal-button-prev',
-                }
-            })
+            // var swiper = new Swiper('.horizonal', {
+            //     loop: true,
+            //     pagination: {
+            //         el: '.horizonal-button-next',
+            //         clickable: true,
+            //     },
+            //     navigation: {
+            //         nextEl: '.horizonal-button-next',
+            //         prevEl: '.horizonal-button-prev',
+            //     }
+            // })
         })
     }
 
