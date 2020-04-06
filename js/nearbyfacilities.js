@@ -50,6 +50,14 @@ class searchNearbyFacilities {
             center: latLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
+        new google.maps.Marker({
+            map: map,
+            position: latLng,
+            animation: google.maps.Animation.DROP,
+            // icon: {
+            //     url: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|0099cc|'
+            // }
+        })
         const service = new google.maps.places.PlacesService(map)
         const searchOptions = {
             location: latLng,
@@ -111,16 +119,41 @@ class searchNearbyFacilities {
     }
 
     createMarker(options, cnt) {
+        // console.log(options.icon)
+        new google.maps.Marker({
+            position: options.geometry.location,
+            map: map,
+            icon: {
+                url: 'http://maps.google.co.jp/mapfiles/ms/icons/green.png',
+                scaledSize: new google.maps.Size(36, 34),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(16, 34)
+            },
+            clickable: false,
+            draggable: false,
+            // opacity: 1,
+            zIndex: cnt,
+            animation: google.maps.Animation.DROP,
+            // optimized: false
+        })
         marker[cnt] = new google.maps.Marker({
             position: options.geometry.location,
             map: map,
+            icon: {
+                // url: 'http://maps.google.co.jp/mapfiles/ms/icons/green.png',
+                url: options.icon,
+                scaledSize: new google.maps.Size(13, 13),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(5, 30)
+            },
             // icon: options.icon,
             title: options.name,
             clickable: true,
             draggable: false,
-            opacity: 1,
+            // opacity: 1,
             zIndex: cnt,
-            animation: google.maps.Animation.DROP
+            animation: google.maps.Animation.DROP,
+            optimized: false
         })
         const hasImages = Array.isArray(options.photos) && options.photos.length > 0
         const noImage = `            <div class="swiper-slide" style="background-image: url(http://placehold.jp/262x104.png?text=No%20Image);"></div>\n`
