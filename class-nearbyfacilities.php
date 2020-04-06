@@ -311,6 +311,15 @@ class NearbyFacilities {
 	}
 
 	/**
+	 * Func load_lang_strings
+	 *
+	 * @return void
+	 */
+	public static function load_lang_strings() {
+		load_plugin_textdomain( 'NearbyFacilities', false, basename( dirname( __FILE__ ) ) . '/languages' );
+	}
+
+	/**
 	 * Func nearbymap_shortcode
 	 *
 	 * @param  array $atts       shortcode attr.
@@ -328,7 +337,7 @@ class NearbyFacilities {
 	 * @param  array $atts       shortcode attr.
 	 * @return void
 	 */
-	public static function execute_shortcode( array $atts ) {
+	private static function execute_shortcode( array $atts ) {
 		$default = array(
 			'address' => false,
 			'width'   => '100%',

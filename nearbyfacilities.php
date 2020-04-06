@@ -36,16 +36,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-add_action( 'plugins_loaded', 'load_lang_strings' );
 require_once plugin_dir_path( __FILE__ ) . 'class-nearbyfacilities.php';
 add_action( 'init', 'NearbyFacilities::init' );
+add_action( 'plugins_loaded', 'NearbyFacilities::load_lang_strings' );
 add_shortcode( 'nearbyFacilities', 'NearbyFacilities::nearbymap_shortcode' );
-
-/**
- * Func load_lang_strings
- *
- * @return void
- */
-function load_lang_strings() {
-	load_plugin_textdomain( 'NearbyFacilities', false, basename( dirname( __FILE__ ) ) . '/languages' );
-}
