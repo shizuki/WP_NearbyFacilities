@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: WordPress VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-02-27 17:11-0600\n"
-"PO-Revision-Date: 2020-04-03 21:35+0900\n"
+"PO-Revision-Date: 2020-04-07 22:35+0900\n"
 "Last-Translator: Hikaru Shizuki shizuki17xx@gmail.com\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -478,3 +478,7 @@ msgstr "APIキーの登録を更新しました。"
 #: class-nearbyfacilities.php:231
 msgid "Shortcode [%s] copied to clipboard."
 msgstr "ショートコード[%s]をクリップボードにコピーしました。"
+
+#: class-nearbyfacilities.php:122
+msgid "generate shortcode"
+msgstr "ショートコードの生成"

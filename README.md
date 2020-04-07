@@ -1,4 +1,4 @@
-# WP_NearbyFacilities 
+# WP_NearbyFacilities
 Markers are displayed on the Google Map at the location specified by the short code and the surrounding facilities.
 
 ### Installation
