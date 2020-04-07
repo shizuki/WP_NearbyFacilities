@@ -118,8 +118,7 @@ class NearbyFacilities {
 	 * @return void
 	 */
 	public function set_plugin_sub_menu() {
-		add_submenu_page( 'NearbyFacilities', 'generatecode', '', 'manage_options', 'NearbyFacilities', false );
-		add_submenu_page( 'NearbyFacilities', 'generatecode', __( 'generate shortcode', 'NearbyFacilities' ), 'manage_options', 'NearbyFacilities-generatecode', array( $this, 'show_about_plugin' ) );
+		add_submenu_page( 'NearbyFacilities', 'generatecode', __('generate shortcode', 'NearbyFacilities'), 'manage_options', 'NearbyFacilities', array( $this, 'show_about_plugin' ) );
 		add_submenu_page( 'NearbyFacilities', 'Settings', __( 'Settings' ), 'manage_options', 'NearbyFacilities-Settings', array( $this, 'show_config_form' ) );
 	}
 
