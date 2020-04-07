@@ -16,15 +16,16 @@ It is a plug-in that displays a Google Map that displays markers at each of the 
 Before you begin, you need to have an API key on Google Maps Platform.
 == Installation ==
 1. `/wp-content/plugins`ディレクトリにプラグインのファイルをディレクトリごとアップロードします。
-    1. Upload the plugin file to the `/ wp-content / plugins` directory.
+    1. Upload the plugin file to the `/wp-content/plugins` directory.
 1. WordPressの「プラグイン」メニューからプラグインを有効化します。
     1. Activate the plugin through the ‘Plugins’ menu in WordPress.
 1. 「NearbyFacilities -> 設定」メニューからAPIキーを登録します。
     1. Register an API key from the "NearbyFacilities -> Settings" menu.
 1. 投稿内にショートコードを書けばGoogle Mapが表示されます。
     1. If you write a short code in the post, Google Map will be displayed.
-    例：[nearbyFacilities address="中心点の住所" type="t検索対象の種類" zoom="ズームレベル" radius="検索半径"]
-    ex：[nearbyFacilities address="center address of map" type="type of search target" zoom="zoom level" radius="search radiu絵x：絵x：
+    例：[nearbyFacilities address="中心点の住所" type="検索対象の種類" zoom="ズームレベル" radius="検索半径"]
+    ex：[nearbyFacilities address="center address of map" type="type of search target" zoom="zoom level" radius="search radius"]
+
 == Frequently Asked Questions ==
 = A question that someone might have =
 - 何か必要なものはありますか？
@@ -60,6 +61,7 @@ An answer to that question.
 - 住所がはっきりわからない場合は、Googleで検索できるのであれば建物名・施設名でも大丈夫です。
     - If you do not know the address, you can use the building name or facility name if you can search on Google.
 == Screenshots ==
+1. ショートコード生成UIページ(Shortcode generation UI page)
 == Changelog ==
 = 1.0.3 =
 - 重複していたサイドメニューの項目名を修正(Fixed duplicate side menu item names)
@@ -71,5 +73,7 @@ An answer to that question.
 - 動作していないjavascriptの読み込みを抑制(Suppress loading of javascript that is not working)
 = 1.0.0 =
 - 公式申請前のバージョン。限定された環境でしか動かなかった(Version before official application. Only worked in a limited environment)
+
 == Upgrade Notice ==
+None.
 == Arbitrary section ==
