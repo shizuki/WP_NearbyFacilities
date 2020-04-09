@@ -1,0 +1,47 @@
+<h1>Nearby Facilities</h1>
+<p><?php _e('Display markers at facilities near the specified point in googlemaps.', 'NearbyFacilities'); ?></p>
+<p class="inputLabel">
+    <label for="addressInput"><?php _e('Address or landmark', 'NearbyFacilities'); ?>:</label>
+    <input type="text" id="addressInput" value="龍野城" style="width: 200px">
+</p>
+<p class="inputLabel">
+    <label for="typeInput"><?php _e('Facility type', 'NearbyFacilities'); ?>:</label>
+    <select id="typeInput">
+        <?php foreach ($types_array as $key => $value) { ?><option value="<?php echo $key ?>"><?php echo $value ?></option><?php } ?>
+    </select>
+</p>
+<p class="inputLabel">
+    <label for="keywordInput"><?php _e('Search keyword', 'NearbyFacilities'); ?>:</label>
+    <input type="text" id="keywordInput" value="" style="width: 200px"><br>
+</p>
+<p class="inputLabel">
+    <label for="radiusInput"><?php _e('Search radius', 'NearbyFacilities'); ?>:</label>
+    <select id="radiusInput">
+        <option value="200" selected="">200 m</option>
+        <option value="500">500 m</option>
+        <option value="800">800 m</option>
+        <option value="1000">1 km</option>
+        <option value="1500">1.5 km</option>
+        <option value="2000">2 km</option>
+    </select>
+</p>
+<p class="inputLabel">
+    <label for="zoomInput"><?php _e('Zoom level', 'NearbyFacilities'); ?>:</label>
+    <input type="range" id="zoomInput" min="1" max="21" value="16" onChange="showZoomVal()"><span id="zoomLevel" style="margin-left:1em">16</span><br>
+</p>
+<p class="inputLabel">
+    <input type="button" value="<?php _e('submit', 'NearbyFacilities'); ?>" onclick="makeShortCode()">
+</p>
+<div class="nearby_facilities_map-container">
+    <div id="shortcodeMap" class="nearby_facilities_map-container-inner" style="width:100%; height:300px;"></div>
+</div>
+<p class="inputLabel">
+    <label for="shortCode"><?php _e('The short code is displayed.<br>Click to copy to clipboard.', 'NearbyFacilities'); ?><br></label>
+    <input type="text" size="50" id="shortCode" value="" onclick="copyShortCode()">
+</p>
+<div id="copy_notice"></div>
+<style>
+    .inputLabel {
+        margin-bottom: 5px;
+    }
+</style>

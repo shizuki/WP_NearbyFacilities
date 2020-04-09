@@ -1,0 +1,3 @@
+<div class="nearby_facilities_map-container">
+    <div id="<?php echo esc_attr($map_id); ?>" class="nearby_facilities_map-container-inner" style="width:<?php echo esc_attr($atts['width']) ?>; height:<?php echo esc_attr($atts['height']) ?>;"></div>
+</div>
