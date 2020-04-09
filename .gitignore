@@ -1,2 +1,3 @@
-.svn/ .svn/
-.svnignore .svnignore
+## SVN files.
+.svn/
+.svnignore
